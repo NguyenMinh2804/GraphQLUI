@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let author of authors, let i = index">
+                <tr>
+                    <th scope="row">{{author.id}}</th>
+                    <td>{{author.name}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="onRemoveAuthor(author.id)">Xóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <form [formGroup]="authourFrom" (ngSubmit)="onAddAuthor()">
+            <legend>From Author</legend>
+            <div class="form-group">
+                <label>ID: </label>
+                <input type="number" class="form-control" formControlName="id" placeholder="Input id">
+            </div>
+            <div class="form-groups">
+                <label>Name: </label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Input name">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

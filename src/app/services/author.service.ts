@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+
 const GET_AUTHORS = gql`
   query {
     authors {
@@ -8,7 +9,7 @@ const GET_AUTHORS = gql`
     }
   }`;
 
-const PUT_AUTHORS = gql`
+const CREATE_AUTHOR = gql`
   mutation($id: ID!, $name: String)
   {
     createAuthor(id: $id, name: $name) {
@@ -23,11 +24,21 @@ const DELETE_AUTHORS = gql`
     deleteAuthor(id: $id)
   }`;
 
+const SUBCRIPTION_CREATE_AUTHOR = gql`subscription{
+  onCreateAuthor {
+    id
+    name
+  }
+}`
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorService {
-  constructor(private apollo: Apollo) { }
+
+  constructor(private apollo: Apollo) {
+  }
 
   loadAuthors() {
     return this.apollo.watchQuery<any>({
@@ -38,7 +49,7 @@ export class AuthorService {
 
   addAuthor(id: any, name: string) {
     return this.apollo.mutate({
-      mutation: PUT_AUTHORS,
+      mutation: CREATE_AUTHOR,
       variables: {
         id: id,
         name: name,
@@ -53,4 +64,10 @@ export class AuthorService {
       }
     })
   }
+
+  // subscriptionCreateAuthor() {
+  //   return this.apollo.subscribe({
+  //     query: SUBCRIPTION_CREATE_AUTHOR
+  //   });
+  // }
 }

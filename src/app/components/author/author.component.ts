@@ -19,6 +19,7 @@ export class AuthorComponent implements OnInit {
   authors: any;
   ngOnInit() {
     this.loadAuthors();
+    // this.onSubscriptionCreateAuthor();
   }
 
   loadAuthors() {
@@ -40,11 +41,19 @@ export class AuthorComponent implements OnInit {
   }
 
   onRemoveAuthor(id: any) {
-    console.log(id);
     this.authorService.removeAuthor(id).subscribe(({ data }) => {
       this.loadAuthors();
     }, (error) => {
       console.log(error);
     });
   }
+
+  // onSubscriptionCreateAuthor() {
+  //   this.authorService.subscriptionCreateAuthor().subscribe(
+  //     (data: any) => {
+  //       this.loadAuthors();
+  //     }, (error) => {
+  //       console.log(error);
+  //     });
+  // }
 }

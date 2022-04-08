@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core'
-import { AuthorComponent } from 'src/components/author/author.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthorComponent } from './components/author/author.component';
 
 @NgModule({
   declarations: [
